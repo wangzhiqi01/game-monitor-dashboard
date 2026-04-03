@@ -2,9 +2,10 @@
   "name": "workspace",
   "version": "1.0.0",
   "description": "Bilibili live scraping experiments",
-  "main": "inspect_bili.js",
+  "main": "scripts/bili_live_count_v2.js",
   "scripts": {
-    "bili:v1": "node scripts/bili_live_count_v1.js"
+    "bili:v1": "node scripts/bili_live_count_v1.js",
+    "bili:v2": "node scripts/bili_live_count_v2.js"
   },
   "keywords": [],
   "author": "",
