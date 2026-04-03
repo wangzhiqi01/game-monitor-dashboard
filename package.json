@@ -2,10 +2,12 @@
   "name": "workspace",
   "version": "1.0.0",
   "description": "Bilibili live scraping experiments",
-  "main": "scripts/bili_live_count_v2.js",
+  "main": "scripts/bili_live_tool_v3.js",
   "scripts": {
     "bili:v1": "node scripts/bili_live_count_v1.js",
-    "bili:v2": "node scripts/bili_live_count_v2.js"
+    "bili:v2": "node scripts/bili_live_count_v2.js",
+    "bili:v3": "node scripts/bili_live_tool_v3.js",
+    "bili:torchlight": "node scripts/bili_live_tool_v3.js --game torchlight-infinite"
   },
   "keywords": [],
   "author": "",
