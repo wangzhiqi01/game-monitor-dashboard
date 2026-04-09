@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>游戏监控系统 V1</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>游戏监控系统</h1>
+        <p>Game Monitor V1</p>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="overview">总览</button>
+        <button class="nav-item" data-view="activity">动态监控</button>
+        <button class="nav-item" data-view="games">游戏档案</button>
+        <button class="nav-item" data-view="cases">营销案例</button>
+      </nav>
+
+      <section class="sidebar-block">
+        <h3>重点池</h3>
+        <div id="focus-games" class="chip-list"></div>
+      </section>
+
+      <section class="sidebar-block">
+        <h3>说明</h3>
+        <p>V1 先用静态原型承载信息架构，后续可接 JSON/API/数据库。</p>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="page-title">总览</h2>
+          <p id="page-subtitle">用于快速扫盘本周行业重点动态</p>
+        </div>
+        <div class="topbar-note">端游 + 手游 / 版本 + 营销 + 投放 + 口碑</div>
+      </header>
+
+      <section id="view-overview" class="view active"></section>
+      <section id="view-activity" class="view"></section>
+      <section id="view-games" class="view"></section>
+      <section id="view-cases" class="view"></section>
+    </main>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
