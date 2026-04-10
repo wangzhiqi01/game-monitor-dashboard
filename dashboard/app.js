@@ -8,6 +8,7 @@ const state = {
     status: '全部',
     category: '全部'
   },
+  search: '',
   selectedGameId: null
 };
 
@@ -116,10 +117,10 @@ function renderOverview() {
       ${sectionCard('当前高热游戏', `
         <div class="list">
           ${hottestGames.map(game => `
-            <div class="list-item clickable" data-open-game="${game.id}">
+            <button class="list-item clickable buttonlike" data-open-game="${game.id}">
               <h4>${game.name}</h4>
               <p>热度指数 ${game.metrics.heatIndex} / ${game.status} / ${game.pool}</p>
-            </div>
+            </button>
           `).join('')}
         </div>
       `)}
@@ -144,13 +145,21 @@ function renderOverview() {
   `;
 }
 
+function gameMatchesSearch(game) {
+  if (!state.search.trim()) return true;
+  const q = state.search.trim().toLowerCase();
+  return [game.name, game.genre, game.pool, game.status, game.audience, game.summary].join(' ').toLowerCase().includes(q);
+}
+
 function filterActivities() {
   return data.activities.filter(item => {
+    const game = data.games.find(g => g.name === item.game);
     const matchPlatform = state.filters.platform === '全部' || item.platform === state.filters.platform;
     const matchCategory = state.filters.category === '全部' || item.category === state.filters.category;
-    const matchStatus = state.filters.status === '全部' || data.games.find(game => game.name === item.game)?.status === state.filters.status;
-    const matchPool = state.filters.pool === '全部' || data.games.find(game => game.name === item.game)?.pool === state.filters.pool;
-    return matchPlatform && matchCategory && matchStatus && matchPool;
+    const matchStatus = state.filters.status === '全部' || game?.status === state.filters.status;
+    const matchPool = state.filters.pool === '全部' || game?.pool === state.filters.pool;
+    const matchSearch = !state.search.trim() || [item.game, item.title, item.summary, item.category].join(' ').toLowerCase().includes(state.search.trim().toLowerCase());
+    return matchPlatform && matchCategory && matchStatus && matchPool && matchSearch;
   });
 }
 
@@ -159,27 +168,31 @@ function filterGames() {
     const matchPool = state.filters.pool === '全部' || game.pool === state.filters.pool;
     const matchPlatform = state.filters.platform === '全部' || game.platform === state.filters.platform;
     const matchStatus = state.filters.status === '全部' || game.status === state.filters.status;
-    return matchPool && matchPlatform && matchStatus;
+    return matchPool && matchPlatform && matchStatus && gameMatchesSearch(game);
   });
 }
 
 function renderFilters(type) {
   const options = getFilterOptions();
-  const keys = type === 'activity'
-    ? ['pool', 'platform', 'status', 'category']
-    : ['pool', 'platform', 'status'];
+  const keys = type === 'activity' ? ['pool', 'platform', 'status', 'category'] : ['pool', 'platform', 'status'];
 
   return `
-    <div class="filter-bar card">
-      ${keys.map(key => `
-        <label class="filter-item">
-          <span>${key === 'pool' ? '监控池' : key === 'platform' ? '平台' : key === 'status' ? '状态' : '动态类型'}</span>
-          <select data-filter-key="${key}">
-            ${options[key].map(option => `<option value="${option}" ${state.filters[key] === option ? 'selected' : ''}>${option}</option>`).join('')}
-          </select>
+    <div class="filter-wrap">
+      <div class="filter-bar card">
+        <label class="filter-item filter-search">
+          <span>搜索</span>
+          <input id="search-input" type="text" placeholder="搜游戏名 / 品类 / 摘要" value="${state.search}" />
         </label>
-      `).join('')}
-      <button class="reset-btn" id="reset-filters">重置筛选</button>
+        ${keys.map(key => `
+          <label class="filter-item">
+            <span>${key === 'pool' ? '监控池' : key === 'platform' ? '平台' : key === 'status' ? '状态' : '动态类型'}</span>
+            <select data-filter-key="${key}">
+              ${options[key].map(option => `<option value="${option}" ${state.filters[key] === option ? 'selected' : ''}>${option}</option>`).join('')}
+            </select>
+          </label>
+        `).join('')}
+        <button class="reset-btn" id="reset-filters">重置筛选</button>
+      </div>
     </div>
   `;
 }
@@ -239,13 +252,16 @@ function renderGames() {
             </div>
             <div class="list">
               ${list.map(game => `
-                <div class="card clickable" data-open-game="${game.id}">
+                <div class="card">
                   <div class="card-head">
                     <div>
                       <h3>${game.name}</h3>
                       <p class="muted">${game.platform} / ${game.genre} / ${game.status}</p>
                     </div>
-                    <button class="detail-btn" data-open-game="${game.id}">查看详情</button>
+                    <div class="btn-row">
+                      <button class="detail-btn" data-open-game="${game.id}">查看详情</button>
+                      <button class="detail-btn secondary" data-route-game="${game.id}">打开独立页</button>
+                    </div>
                   </div>
                   <div class="profile-grid">
                     <div class="profile-section">
@@ -314,24 +330,18 @@ function renderCases() {
   `;
 }
 
-function renderGameDetail() {
-  const game = data.games.find(item => item.id === state.selectedGameId);
-  const container = document.getElementById('game-detail');
-  if (!game) {
-    container.classList.remove('active');
-    container.innerHTML = '';
-    return;
-  }
-
-  container.innerHTML = `
-    <div class="detail-overlay" data-close-detail="true"></div>
+function renderGameDetailPanel(game) {
+  return `
     <div class="detail-panel">
       <div class="card-head">
         <div>
           <h3>${game.name}</h3>
           <p class="muted">${game.pool} / ${game.platform} / ${game.genre} / ${game.status}</p>
         </div>
-        <button class="detail-btn secondary" data-close-detail="true">关闭</button>
+        <div class="btn-row">
+          <button class="detail-btn secondary" data-copy-link="${game.id}">复制链接</button>
+          <button class="detail-btn secondary" data-close-detail="true">关闭</button>
+        </div>
       </div>
       <div class="profile-grid">
         <div class="profile-section">
@@ -370,7 +380,48 @@ function renderGameDetail() {
       </div>
     </div>
   `;
+}
+
+function renderGameDetail() {
+  const game = data.games.find(item => item.id === state.selectedGameId);
+  const container = document.getElementById('game-detail');
+  const routeView = document.getElementById('route-game-view');
+
+  if (routeView) {
+    const routeGame = getRouteGame();
+    if (routeGame) {
+      routeView.innerHTML = `<div class="detail-route">${renderGameDetailPanel(routeGame)}</div>`;
+      routeView.classList.add('active');
+    } else {
+      routeView.innerHTML = '';
+      routeView.classList.remove('active');
+    }
+  }
+
+  if (!game) {
+    container.classList.remove('active');
+    container.innerHTML = '';
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="detail-overlay" data-close-detail="true"></div>
+    ${renderGameDetailPanel(game)}
+  `;
   container.classList.add('active');
+}
+
+function getRouteGame() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('game');
+  return data.games.find(item => item.id === id) || null;
+}
+
+function updateRouteGame(gameId) {
+  const url = new URL(window.location.href);
+  if (gameId) url.searchParams.set('game', gameId);
+  else url.searchParams.delete('game');
+  window.history.replaceState({}, '', url.toString());
 }
 
 function renderCurrentView() {
@@ -378,7 +429,6 @@ function renderCurrentView() {
   if (state.currentView === 'activity') renderActivity();
   if (state.currentView === 'games') renderGames();
   if (state.currentView === 'cases') renderCases();
-  bindDynamicActions();
   renderGameDetail();
 }
 
@@ -392,46 +442,95 @@ function activateView(view) {
   renderCurrentView();
 }
 
-function bindDynamicActions() {
-  document.querySelectorAll('[data-filter-key]').forEach(select => {
-    select.addEventListener('change', (event) => {
-      state.filters[event.target.dataset.filterKey] = event.target.value;
-      renderCurrentView();
-    });
-  });
+function resetFilters() {
+  state.filters = { pool: '全部', platform: '全部', status: '全部', category: '全部' };
+  state.search = '';
+  renderCurrentView();
+}
 
-  const reset = document.getElementById('reset-filters');
-  if (reset) {
-    reset.addEventListener('click', () => {
-      state.filters = { pool: '全部', platform: '全部', status: '全部', category: '全部' };
-      renderCurrentView();
-    });
-  }
+function bindGlobalEvents() {
+  document.addEventListener('click', async (event) => {
+    const nav = event.target.closest('.nav-item');
+    if (nav) {
+      activateView(nav.dataset.view);
+      return;
+    }
 
-  document.querySelectorAll('[data-open-game]').forEach(button => {
-    button.addEventListener('click', (event) => {
-      const gameId = event.currentTarget.dataset.openGame;
-      state.selectedGameId = gameId;
+    const openGame = event.target.closest('[data-open-game]');
+    if (openGame) {
+      state.selectedGameId = openGame.dataset.openGame;
       renderGameDetail();
-    });
-  });
+      return;
+    }
 
-  document.querySelectorAll('[data-close-detail]').forEach(button => {
-    button.addEventListener('click', () => {
+    const routeGame = event.target.closest('[data-route-game]');
+    if (routeGame) {
+      updateRouteGame(routeGame.dataset.routeGame);
+      renderGameDetail();
+      return;
+    }
+
+    const closeDetail = event.target.closest('[data-close-detail]');
+    if (closeDetail) {
       state.selectedGameId = null;
       renderGameDetail();
-    });
+      return;
+    }
+
+    const reset = event.target.closest('#reset-filters');
+    if (reset) {
+      resetFilters();
+      return;
+    }
+
+    const copyBtn = event.target.closest('[data-copy-link]');
+    if (copyBtn) {
+      const gameId = copyBtn.dataset.copyLink;
+      updateRouteGame(gameId);
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        copyBtn.textContent = '已复制';
+        setTimeout(() => { copyBtn.textContent = '复制链接'; }, 1200);
+      } catch {
+        copyBtn.textContent = '复制失败';
+        setTimeout(() => { copyBtn.textContent = '复制链接'; }, 1200);
+      }
+    }
+  });
+
+  document.addEventListener('change', (event) => {
+    const select = event.target.closest('[data-filter-key]');
+    if (!select) return;
+    state.filters[select.dataset.filterKey] = select.value;
+    renderCurrentView();
+  });
+
+  document.addEventListener('input', (event) => {
+    const input = event.target.closest('#search-input');
+    if (!input) return;
+    state.search = input.value;
+    renderCurrentView();
+  });
+
+  window.addEventListener('popstate', () => {
+    renderGameDetail();
   });
 }
 
 function init() {
   renderFocusGames();
   renderUpdateMechanismSidebar();
+  bindGlobalEvents();
   renderCurrentView();
-
-  document.querySelectorAll('.nav-item').forEach(btn => {
-    btn.addEventListener('click', () => activateView(btn.dataset.view));
-  });
+  if (getRouteGame()) {
+    document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+    document.querySelector('#view-games').classList.add('active');
+    state.currentView = 'games';
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.toggle('active', el.dataset.view === 'games'));
+    document.getElementById('page-title').textContent = viewMeta.games.title;
+    document.getElementById('page-subtitle').textContent = viewMeta.games.subtitle;
+    renderCurrentView();
+  }
 }
 
 init();

@@ -199,6 +199,15 @@ body {
 .clickable:hover {
   border-color: var(--accent);
 }
+.buttonlike {
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+.buttonlike h4, .buttonlike p {
+  pointer-events: none;
+}
 
 .profile-grid {
   display: grid;
@@ -215,9 +224,14 @@ body {
   line-height: 1.8;
 }
 
+.filter-wrap {
+  position: sticky;
+  top: 12px;
+  z-index: 10;
+}
 .filter-bar {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: minmax(220px, 1.2fr) repeat(4, minmax(0, 1fr)) auto;
   gap: 12px;
   align-items: end;
 }
@@ -227,7 +241,8 @@ body {
   font-size: 13px;
   color: var(--muted);
 }
-.filter-item select {
+.filter-item select,
+.filter-item input {
   background: var(--panel-2);
   color: var(--text);
   border: 1px solid var(--line);
@@ -245,6 +260,29 @@ body {
 .detail-btn.secondary {
   background: transparent;
   border-color: var(--line);
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.route-game-view {
+  display: none;
+  padding: 24px;
+}
+.route-game-view.active {
+  display: block;
+}
+.detail-route .detail-panel {
+  position: static;
+  width: 100%;
+  max-width: none;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  box-shadow: none;
 }
 
 .detail-modal {
