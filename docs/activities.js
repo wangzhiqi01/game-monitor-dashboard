@@ -9,12 +9,12 @@ window.GAME_MONITOR_ACTIVITIES = [
     title: 'SS12 金钞项目继续推进达人内容合作',
     importance: 'high',
     summary: '重点围绕金钞获取机制、回坑理由、中国美院共创三层信息展开达人传播。',
-    sourcePlatform: '人工录入 / 业务同步',
-    sourceType: '业务情报',
-    sourceUrl: '',
-    capturedAt: '2026-04-13 14:51',
+    sourcePlatform: '官网 / 官方站点 + 业务同步',
+    sourceType: '官方来源样板',
+    sourceUrl: 'https://torchlight.xd.com/',
+    capturedAt: '2026-04-13 15:31',
     freshness: 'today',
-    todo: '补充达人名单、发布日期和分平台投放节奏',
+    todo: '补充达人名单、发布日期和分平台投放节奏；后续从官网公告页继续细化到具体公告链接',
     owner: '大飞哥'
   },
   {
