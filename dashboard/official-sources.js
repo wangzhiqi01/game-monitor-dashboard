@@ -2,7 +2,8 @@ window.GAME_MONITOR_OFFICIAL_SOURCES = {
   'torchlight-infinite': {
     officialSite: 'https://torchlight.xd.com/',
     announcementHub: 'https://torchlight.xd.com/us/news/list',
-    notes: '已验证官网可拉取；已确认 /us/news/list 可作为新闻/公告列表入口样板。'
+    apiFeed: 'https://website.xdcdn.net/form/website/torchlight/news.json',
+    notes: '已验证官网可拉取；已确认 /us/news/list 为入口，并已识别新闻 JSON 接口。'
   },
   'delta-force': {
     officialSite: 'https://df.qq.com/',

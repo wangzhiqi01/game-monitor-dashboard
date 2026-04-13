@@ -404,6 +404,7 @@ function renderGames() {
                       <ul>
                         <li>官网：${getOfficialSource(game.id).officialSite ? `<a class="inline-link" href="${getOfficialSource(game.id).officialSite}" target="_blank" rel="noreferrer">打开官网</a>` : '待补充'}</li>
                         <li>公告：${getOfficialSource(game.id).announcementHub ? `<a class="inline-link" href="${getOfficialSource(game.id).announcementHub}" target="_blank" rel="noreferrer">查看公告入口</a>` : '待补充'}</li>
+                        <li>JSON接口：${getOfficialSource(game.id).apiFeed ? `<a class="inline-link" href="${getOfficialSource(game.id).apiFeed}" target="_blank" rel="noreferrer">查看JSON源</a>` : '待补充'}</li>
                         <li>备注：${getOfficialSource(game.id).notes}</li>
                       </ul>
                     </div>
@@ -513,6 +514,7 @@ function renderGameDetailPanel(game) {
           <ul>
             <li>官网：${getOfficialSource(game.id).officialSite ? `<a class="inline-link" href="${getOfficialSource(game.id).officialSite}" target="_blank" rel="noreferrer">打开官网</a>` : '待补充'}</li>
             <li>公告：${getOfficialSource(game.id).announcementHub ? `<a class="inline-link" href="${getOfficialSource(game.id).announcementHub}" target="_blank" rel="noreferrer">查看公告入口</a>` : '待补充'}</li>
+            <li>JSON接口：${getOfficialSource(game.id).apiFeed ? `<a class="inline-link" href="${getOfficialSource(game.id).apiFeed}" target="_blank" rel="noreferrer">查看JSON源</a>` : '待补充'}</li>
             <li>备注：${getOfficialSource(game.id).notes}</li>
           </ul>
         </div>

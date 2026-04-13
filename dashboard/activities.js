@@ -32,7 +32,25 @@ window.GAME_MONITOR_ACTIVITIES = [
     sourceUrl: 'https://torchlight.xd.com/us/news/list',
     capturedAt: '2026-04-13 15:34',
     freshness: 'today',
-    todo: '继续识别列表页中的公告项链接规律，优先拆 2-3 条公告样板',
+    todo: '已识别出新闻 JSON 接口；下一步优先从 JSON 中拆 2-3 条公告样板并写回系统',
+    owner: '大飞哥'
+  },
+  {
+    id: 'act-torchlight-20260413-03',
+    date: '2026-04-13',
+    game: '火炬之光：无限',
+    gameId: 'torchlight-infinite',
+    platform: '端游/手游',
+    category: '版本更新',
+    title: '已识别火炬官网新闻 JSON 接口，可直接读取公告列表',
+    importance: 'high',
+    summary: '已从新闻列表页中定位到 API_GET_NEWS，并确认其实际 JSON 数据源为 website.xdcdn.net/form/website/torchlight/news.json，可直接读取新闻/活动列表。',
+    sourcePlatform: '官网 / 新闻 JSON',
+    sourceType: '结构化公告源验证',
+    sourceUrl: 'https://website.xdcdn.net/form/website/torchlight/news.json',
+    capturedAt: '2026-04-13 15:35',
+    freshness: 'today',
+    todo: '从 JSON 中优先拆出 2-3 条与赛季/活动相关的公告样板，写成真实公告流',
     owner: '大飞哥'
   },
   {
