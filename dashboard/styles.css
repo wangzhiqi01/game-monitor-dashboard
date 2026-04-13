@@ -108,6 +108,32 @@ body {
   margin: 0;
 }
 
+.interaction-guide {
+  margin-bottom: 16px;
+}
+.guide-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.guide-tag {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(56, 189, 248, 0.1);
+}
+.muted-tag {
+  border-color: var(--line);
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+}
+.warn-tag {
+  border-color: rgba(245,158,11,.35);
+  background: rgba(245,158,11,.12);
+}
+
 .view { display: none; }
 .view.active { display: block; }
 
@@ -173,6 +199,7 @@ body {
 .badge.low { color: #bbf7d0; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); }
 .badge.fresh { color: #bbf7d0; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); }
 .badge.stale { color: #fecaca; border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.12); }
+.badge.planned { color: #cbd5e1; border-color: rgba(148,163,184,.35); background: rgba(148,163,184,.1); }
 
 .list {
   display: grid;
@@ -194,6 +221,12 @@ body {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+}
+.disabled-card {
+  opacity: 0.92;
+}
+.disabled-card:hover {
+  border-color: var(--line);
 }
 .clickable {
   cursor: pointer;

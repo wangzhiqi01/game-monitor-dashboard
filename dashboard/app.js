@@ -38,6 +38,12 @@ function freshnessBadge(value) {
   return '<span class="badge stale">非当日</span>';
 }
 
+function pipelineBadge(status) {
+  if (status === 'planned') return '<span class="badge planned">开发中</span>';
+  if (status === 'active') return '<span class="badge fresh">已接通</span>';
+  return '<span class="badge medium">待定</span>';
+}
+
 function sectionCard(title, body) {
   return `<div class="card"><h3 class="section-title">${title}</h3>${body}</div>`;
 }
@@ -193,7 +199,7 @@ function renderOverview() {
     <div class="grid-2">
       ${sectionCard('抓取接口位', `
         <div class="list">
-          ${data.fetchPipelines.map(item => `<div class="list-item"><h4>${item.name}</h4><p>状态：${item.status} / 目标：${item.target}</p><p>${item.nextStep}</p></div>`).join('')}
+          ${data.fetchPipelines.map(item => `<div class="list-item disabled-card"><h4>${item.name} ${pipelineBadge(item.status)}</h4><p>目标：${item.target}</p><p>${item.nextStep}</p></div>`).join('')}
         </div>
       `)}
       ${sectionCard('第四轮重点', `
@@ -210,7 +216,7 @@ function renderOverview() {
         <div class="list">
           ${data.games.map(game => {
             const source = getOfficialSource(game.id);
-            return `<div class="list-item"><h4>${game.name}</h4><p>${source.officialSite ? '官网已补' : '官网待补'} / ${source.announcementHub ? '公告入口已补' : '公告入口待补'}</p></div>`;
+            return `<div class="list-item disabled-card"><h4>${game.name}</h4><p>${source.officialSite ? '官网已补' : '官网待补'} / ${source.announcementHub ? '公告入口已补' : '公告入口待补'}</p></div>`;
           }).join('')}
         </div>
       `)}
