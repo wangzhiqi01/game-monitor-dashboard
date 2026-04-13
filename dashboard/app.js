@@ -42,6 +42,10 @@ function sectionCard(title, body) {
   return `<div class="card"><h3 class="section-title">${title}</h3>${body}</div>`;
 }
 
+function getOfficialSource(gameId) {
+  return (window.GAME_MONITOR_OFFICIAL_SOURCES || {})[gameId] || { officialSite: '', announcementHub: '', notes: '待补来源' };
+}
+
 function getPoolStats() {
   return {
     self: data.games.filter(game => game.pool === '自家'),
@@ -197,6 +201,24 @@ function renderOverview() {
           <div class="list-item"><h4>异常提醒</h4><p>游戏层已支持最后更新时间与待更新提醒。</p></div>
           <div class="list-item"><h4>快捷筛选</h4><p>动态页支持只看当日、只看高优、只看缺链接。</p></div>
           <div class="list-item"><h4>接口位</h4><p>已为官网公告与 B站视频/直播预留接入位。</p></div>
+        </div>
+      `)}
+    </div>
+
+    <div class="grid-2">
+      ${sectionCard('V1.6 官网来源接入状态', `
+        <div class="list">
+          ${data.games.map(game => {
+            const source = getOfficialSource(game.id);
+            return `<div class="list-item"><h4>${game.name}</h4><p>${source.officialSite ? '官网已补' : '官网待补'} / ${source.announcementHub ? '公告入口已补' : '公告入口待补'}</p></div>`;
+          }).join('')}
+        </div>
+      `)}
+      ${sectionCard('V1.6 当前目标', `
+        <div class="list">
+          <div class="list-item"><h4>第一步</h4><p>先把官网 / 官方公告入口补全，形成真实来源底座。</p></div>
+          <div class="list-item"><h4>第二步</h4><p>后续基于这些入口做公告抓取与结构化动态写入。</p></div>
+          <div class="list-item"><h4>当前缺口</h4><p>失控进化官方入口仍待补充确认。</p></div>
         </div>
       `)}
     </div>
@@ -377,6 +399,14 @@ function renderGames() {
                       <h4>优先来源</h4>
                       <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
                     </div>
+                    <div class="profile-section">
+                      <h4>官网 / 公告入口</h4>
+                      <ul>
+                        <li>官网：${getOfficialSource(game.id).officialSite ? `<a class="inline-link" href="${getOfficialSource(game.id).officialSite}" target="_blank" rel="noreferrer">打开官网</a>` : '待补充'}</li>
+                        <li>公告：${getOfficialSource(game.id).announcementHub ? `<a class="inline-link" href="${getOfficialSource(game.id).announcementHub}" target="_blank" rel="noreferrer">查看公告入口</a>` : '待补充'}</li>
+                        <li>备注：${getOfficialSource(game.id).notes}</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               `).join('')}
@@ -477,6 +507,14 @@ function renderGameDetailPanel(game) {
         <div class="profile-section">
           <h4>建议来源优先级</h4>
           <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+        <div class="profile-section">
+          <h4>官网 / 公告入口</h4>
+          <ul>
+            <li>官网：${getOfficialSource(game.id).officialSite ? `<a class="inline-link" href="${getOfficialSource(game.id).officialSite}" target="_blank" rel="noreferrer">打开官网</a>` : '待补充'}</li>
+            <li>公告：${getOfficialSource(game.id).announcementHub ? `<a class="inline-link" href="${getOfficialSource(game.id).announcementHub}" target="_blank" rel="noreferrer">查看公告入口</a>` : '待补充'}</li>
+            <li>备注：${getOfficialSource(game.id).notes}</li>
+          </ul>
         </div>
       </div>
     </div>
