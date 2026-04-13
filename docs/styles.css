@@ -246,6 +246,26 @@ body {
 .interaction-guide {
   margin-bottom: 16px;
 }
+.overview-hero {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(56,189,248,.10), rgba(124,58,237,.08), rgba(17,24,39,.95));
+}
+.overview-hero-side {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.research-item {
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  border-color: rgba(148,163,184,.18);
+}
+.strong-hover:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
 .guide-tags {
   display: flex;
   flex-wrap: wrap;
@@ -518,6 +538,7 @@ body {
   .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
   .cards, .grid-2, .profile-grid { grid-template-columns: 1fr; }
   .hero-panel, .detail-grid, .hero-side { grid-template-columns: 1fr; }
+  .overview-hero { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {

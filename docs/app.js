@@ -103,8 +103,28 @@ function renderOverview() {
   const pools = getPoolStats();
   const hottestGames = [...games].sort((a, b) => b.metrics.heatIndex - a.metrics.heatIndex).slice(0, 3);
   const highActivities = activities.filter(item => item.importance === 'high');
+  const selfGame = games.find(item => item.pool === '自家') || games[0];
+  const selfSource = getOfficialSource(selfGame.id);
 
   document.getElementById('view-overview').innerHTML = `
+    <div class="overview-hero card">
+      <div class="overview-hero-main">
+        <div class="hero-kicker">V2.0 游戏研究总览</div>
+        <h2>重点游戏情报总览台</h2>
+        <p class="hero-summary">围绕重点监控池，统一查看：当日动态、更新状态、真实来源、任务清单与后续抓取接口位。当前以《${selfGame.name}》作为首个深度样板页。</p>
+        <div class="hero-actions">
+          ${actionLink('查看火炬官网', selfSource.officialSite)}
+          ${actionLink('查看火炬公告入口', selfSource.announcementHub, 'secondary')}
+          ${actionLink('查看火炬JSON源', selfSource.apiFeed, 'secondary')}
+        </div>
+      </div>
+      <div class="overview-hero-side">
+        ${metricCard('重点池', overview.monitoredGames, '当前监控游戏总量')}
+        ${metricCard('当日动态', freshCount, '满足当天来源要求')}
+        ${metricCard('待更新游戏', staleGames.length, '需继续补当日信息')}
+      </div>
+    </div>
+
     <div class="cards">
       ${metricCard('重点监控游戏', overview.monitoredGames, '当前重点池总量')}
       ${metricCard('已上线重点', overview.launchedGames, '成熟产品与竞品观察池')}
@@ -121,14 +141,14 @@ function renderOverview() {
     <div class="grid-2">
       ${sectionCard('重点池结构', `
         <div class="list">
-          <div class="list-item"><h4>自家产品</h4><p>${pools.self.map(item => item.name).join('、')}</p></div>
-          <div class="list-item"><h4>已上线重点监控</h4><p>${pools.launched.filter(item => item.pool !== '自家').map(item => item.name).join('、')}</p></div>
-          <div class="list-item"><h4>预约中重点监控</h4><p>${pools.upcoming.map(item => item.name).join('、')}</p></div>
+          <div class="list-item research-item"><h4>自家产品</h4><p>${pools.self.map(item => item.name).join('、')}</p></div>
+          <div class="list-item research-item"><h4>已上线重点监控</h4><p>${pools.launched.filter(item => item.pool !== '自家').map(item => item.name).join('、')}</p></div>
+          <div class="list-item research-item"><h4>预约中重点监控</h4><p>${pools.upcoming.map(item => item.name).join('、')}</p></div>
         </div>
       `)}
       ${sectionCard('重点提醒', `
         <div class="list">
-          ${overview.watchouts.map(text => `<div class="list-item"><p>${text}</p></div>`).join('')}
+          ${overview.watchouts.map(text => `<div class="list-item research-item"><p>${text}</p></div>`).join('')}
         </div>
       `)}
     </div>
@@ -152,7 +172,7 @@ function renderOverview() {
       ${sectionCard('当前高热游戏', `
         <div class="list">
           ${hottestGames.map(game => `
-            <button class="list-item clickable buttonlike" data-open-game="${game.id}">
+            <button class="list-item clickable buttonlike research-item strong-hover" data-open-game="${game.id}">
               <h4>${game.name}</h4>
               <p>热度指数 ${game.metrics.heatIndex} / ${game.status} / ${game.pool}</p>
             </button>
@@ -196,7 +216,7 @@ function renderOverview() {
       `)}
       ${sectionCard('今日更新任务清单', `
         <div class="list">
-          ${data.activities.map(item => `<div class="list-item"><h4>${item.game} · ${item.title}</h4><p>${item.todo || '暂无待补动作'} / 责任人：${item.owner || '待定'}</p></div>`).join('')}
+          ${data.activities.map(item => `<div class="list-item research-item"><h4>${item.game} · ${item.title}</h4><p>${item.todo || '暂无待补动作'} / 责任人：${item.owner || '待定'}</p></div>`).join('')}
         </div>
       `)}
     </div>
