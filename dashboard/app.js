@@ -174,9 +174,9 @@ function renderOverview() {
           </tbody>
         </table>
       `)}
-      ${sectionCard('待更新游戏提醒', `
+      ${sectionCard('今日更新任务清单', `
         <div class="list">
-          ${staleGames.length ? staleGames.map(item => `<div class="list-item"><h4>${item.name}</h4><p>最后更新时间：${item.lastUpdatedAt}</p></div>`).join('') : '<div class="list-item"><p>当前 9 款重点游戏均为当日更新状态。</p></div>'}
+          ${data.activities.map(item => `<div class="list-item"><h4>${item.game} · ${item.title}</h4><p>${item.todo || '暂无待补动作'} / 责任人：${item.owner || '待定'}</p></div>`).join('')}
         </div>
       `)}
     </div>
@@ -254,7 +254,7 @@ function renderActivity() {
     <div class="card" style="margin-top:16px;">
       <h3 class="section-title">重点动态流</h3>
       <table class="table">
-        <thead><tr><th>日期</th><th>游戏</th><th>平台</th><th>类型</th><th>优先级</th><th>来源</th><th>摘要</th></tr></thead>
+        <thead><tr><th>日期</th><th>游戏</th><th>平台</th><th>类型</th><th>优先级</th><th>来源</th><th>摘要</th><th>待补动作</th></tr></thead>
         <tbody>
           ${filtered.map(item => `
             <tr>
@@ -267,10 +267,12 @@ function renderActivity() {
                 ${freshnessBadge(item.freshness)}<br />
                 <span class="muted">${item.sourcePlatform}</span><br />
                 <span class="muted">${item.sourceType} · ${item.capturedAt}</span>
+                ${item.sourceUrl ? `<br /><a class="inline-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看来源</a>` : '<br /><span class="muted">暂无链接</span>'}
               </td>
               <td><strong>${item.title}</strong><br /><span class="muted">${item.summary}</span></td>
+              <td><span class="muted">${item.todo || '—'}</span></td>
             </tr>
-          `).join('') || '<tr><td colspan="7" class="muted">当前筛选条件下暂无动态。</td></tr>'}
+          `).join('') || '<tr><td colspan="8" class="muted">当前筛选条件下暂无动态。</td></tr>'}
         </tbody>
       </table>
     </div>

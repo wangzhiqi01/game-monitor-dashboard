@@ -263,6 +263,13 @@ body {
   background: transparent;
   border-color: var(--line);
 }
+.inline-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+.inline-link:hover {
+  text-decoration: underline;
+}
 
 .btn-row {
   display: flex;
