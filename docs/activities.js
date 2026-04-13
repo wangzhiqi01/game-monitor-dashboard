@@ -1,5 +1,23 @@
 window.GAME_MONITOR_ACTIVITIES = [
   {
+    id: 'act-torchlight-20260413-00',
+    date: '2026-04-13',
+    game: '火炬之光：无限',
+    gameId: 'torchlight-infinite',
+    platform: '端游/手游',
+    category: '版本更新',
+    title: '官网新闻列表确认存在，可作为公告抓取入口样板',
+    importance: 'high',
+    summary: '已确认火炬官网存在 /us/news/list 新闻列表入口，可作为后续公告抓取和拆条的首个正式来源层。',
+    sourcePlatform: '官网 / 新闻列表',
+    sourceType: '公告入口验证',
+    sourceUrl: 'https://torchlight.xd.com/us/news/list',
+    capturedAt: '2026-04-13 15:34',
+    freshness: 'today',
+    todo: '下一步继续细化公告列表的条目提取方式，并确认是否存在可直接定位单条公告的 URL 结构',
+    owner: '大飞哥'
+  },
+  {
     id: 'act-torchlight-20260413-01',
     date: '2026-04-13',
     game: '火炬之光：无限',
