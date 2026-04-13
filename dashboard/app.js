@@ -30,7 +30,7 @@ function badge(level) {
 }
 
 function metricCard(title, value, note) {
-  return `<div class="card"><h3>${title}</h3><div class="metric">${value}</div><div class="muted">${note}</div></div>`;
+  return `<div class="card metric-card"><h3>${title}</h3><div class="metric">${value}</div><div class="muted">${note}</div></div>`;
 }
 
 function freshnessBadge(value) {
@@ -215,8 +215,8 @@ function renderOverview() {
         </table>
       `)}
       ${sectionCard('今日更新任务清单', `
-        <div class="list">
-          ${data.activities.map(item => `<div class="list-item research-item"><h4>${item.game} · ${item.title}</h4><p>${item.todo || '暂无待补动作'} / 责任人：${item.owner || '待定'}</p></div>`).join('')}
+      <div class="list">
+          ${data.activities.map(item => `<div class="list-item research-item task-item"><h4>${item.game} · ${item.title}</h4><p>${item.todo || '暂无待补动作'}</p><span class="task-owner">责任人：${item.owner || '待定'}</span></div>`).join('')}
         </div>
       `)}
     </div>
@@ -340,30 +340,30 @@ function renderActivity() {
       ${metricCard('低优先级', grouped.low.length, '可观察但暂不抢资源')}
       ${metricCard('动态总数', filtered.length, '当前筛选结果')}
     </div>
-    <div class="card" style="margin-top:16px;">
+    <div class="card activity-stream-card" style="margin-top:16px;">
       <h3 class="section-title">重点动态流</h3>
-      <table class="table">
-        <thead><tr><th>日期</th><th>游戏</th><th>平台</th><th>类型</th><th>优先级</th><th>来源</th><th>摘要</th><th>待补动作</th></tr></thead>
-        <tbody>
-          ${filtered.map(item => `
-            <tr>
-              <td>${item.date}</td>
-              <td>${item.game}</td>
-              <td>${item.platform}</td>
-              <td>${item.category}</td>
-              <td>${badge(item.importance)}</td>
-              <td>
-                ${freshnessBadge(item.freshness)}<br />
-                <span class="muted">${item.sourcePlatform}</span><br />
-                <span class="muted">${item.sourceType} · ${item.capturedAt}</span>
-                ${item.sourceUrl ? `<br /><a class="inline-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看来源</a>` : '<br /><span class="muted">暂无链接</span>'}
-              </td>
-              <td><strong>${item.title}</strong><br /><span class="muted">${item.summary}</span></td>
-              <td><span class="muted">${item.todo || '—'}</span></td>
-            </tr>
-          `).join('') || '<tr><td colspan="8" class="muted">当前筛选条件下暂无动态。</td></tr>'}
-        </tbody>
-      </table>
+      <div class="timeline-list">
+        ${filtered.map(item => `
+          <div class="timeline-item research-timeline-item">
+            <div class="timeline-top">
+              <span class="meta-pill small">${item.date}</span>
+              <span class="meta-pill small">${item.game}</span>
+              <span class="meta-pill small">${item.category}</span>
+              ${badge(item.importance)}
+              ${freshnessBadge(item.freshness)}
+            </div>
+            <h4>${item.title}</h4>
+            <p class="muted">${item.summary}</p>
+            <div class="timeline-links column-links">
+              <span class="muted">平台：${item.platform}</span>
+              <span class="muted">来源：${item.sourcePlatform} / ${item.sourceType}</span>
+              <span class="muted">抓取时间：${item.capturedAt}</span>
+              <span class="muted">待补动作：${item.todo || '—'}</span>
+              ${item.sourceUrl ? `<a class="inline-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看原始来源</a>` : '<span class="muted">暂无来源链接</span>'}
+            </div>
+          </div>
+        `).join('') || '<p class="muted">当前筛选条件下暂无动态。</p>'}
+      </div>
     </div>
   `;
 }
