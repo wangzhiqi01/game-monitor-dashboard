@@ -52,6 +52,11 @@ function getOfficialSource(gameId) {
   return (window.GAME_MONITOR_OFFICIAL_SOURCES || {})[gameId] || { officialSite: '', announcementHub: '', notes: '待补来源' };
 }
 
+function actionLink(label, url, kind = 'primary') {
+  if (!url) return `<span class="action-link disabled ${kind}">${label}（待补）</span>`;
+  return `<a class="action-link ${kind}" href="${url}" target="_blank" rel="noreferrer">${label}</a>`;
+}
+
 function getPoolStats() {
   return {
     self: data.games.filter(game => game.pool === '自家'),
@@ -455,31 +460,62 @@ function renderCases() {
 }
 
 function renderGameDetailPanel(game) {
+  const source = getOfficialSource(game.id);
+  const relatedActivities = data.activities.filter(item => item.gameId === game.id).slice(0, 6);
+  const freshCount = relatedActivities.filter(item => item.freshness === 'today').length;
   return `
-    <div class="detail-panel">
-      <div class="card-head">
-        <div>
-          <h3>${game.name}</h3>
-          <p class="muted">${game.pool} / ${game.platform} / ${game.genre} / ${game.status}</p>
+    <div class="detail-panel v2-panel">
+      <div class="hero-panel">
+        <div class="hero-main">
+          <div class="hero-kicker">V2.0 研究型游戏情报页</div>
+          <h2>${game.name}</h2>
+          <p class="hero-summary">${game.summary}</p>
+          <div class="hero-meta">
+            <span class="meta-pill">${game.pool}</span>
+            <span class="meta-pill">${game.platform}</span>
+            <span class="meta-pill">${game.genre}</span>
+            <span class="meta-pill">${game.status}</span>
+            ${freshnessBadge(game.freshness)}
+          </div>
+          <div class="hero-actions">
+            ${actionLink('打开官网', source.officialSite)}
+            ${actionLink('公告入口', source.announcementHub, 'secondary')}
+            ${actionLink('JSON源', source.apiFeed, 'secondary')}
+          </div>
         </div>
-        <div class="btn-row">
-          <button class="detail-btn secondary" data-copy-link="${game.id}">复制链接</button>
-          <button class="detail-btn secondary" data-close-detail="true">关闭</button>
+        <div class="hero-side">
+          <div class="stat-box">
+            <span class="stat-label">最后更新时间</span>
+            <strong>${game.lastUpdatedAt}</strong>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">最近动态</span>
+            <strong>${relatedActivities.length} 条</strong>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">当日动态</span>
+            <strong>${freshCount} 条</strong>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">热度指数</span>
+            <strong>${game.metrics.heatIndex}</strong>
+          </div>
         </div>
       </div>
-      <div class="profile-grid">
-        <div class="profile-section">
-          <h4>基础判断</h4>
+
+      <div class="detail-grid">
+        <div class="feature-card card">
+          <h3>核心判断</h3>
           <ul>
             <li>研发/发行：${game.developer}</li>
-            <li>核心概述：${game.summary}</li>
             <li>目标人群：${game.audience}</li>
             <li>最后更新时间：${game.lastUpdatedAt}</li>
             <li>更新状态：${game.freshness === 'today' ? '当日' : '非当日'}</li>
           </ul>
         </div>
-        <div class="profile-section">
-          <h4>核心指标</h4>
+
+        <div class="feature-card card">
+          <h3>核心指标</h3>
           <ul>
             <li>热度指数：${game.metrics.heatIndex}</li>
             <li>社媒讨论：${game.metrics.socialVolume}</li>
@@ -487,43 +523,76 @@ function renderGameDetailPanel(game) {
             <li>广告趋势：${game.metrics.adTrend}</li>
           </ul>
         </div>
-        <div class="profile-section">
-          <h4>核心卖点</h4>
+
+        <div class="feature-card card">
+          <h3>核心卖点</h3>
           <ul>${game.coreSellingPoints.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <div class="profile-section">
-          <h4>当前重点监控</h4>
+
+        <div class="feature-card card">
+          <h3>当前重点监控</h3>
           <ul>${game.monitoringFocus.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <div class="profile-section">
-          <h4>风险点</h4>
+
+        <div class="feature-card card tone-risk">
+          <h3>风险点</h3>
           <ul>${game.risks.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <div class="profile-section">
-          <h4>机会点</h4>
+
+        <div class="feature-card card tone-opportunity">
+          <h3>机会点</h3>
           <ul>${game.opportunities.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <div class="profile-section">
-          <h4>最近来源要求</h4>
+
+        <div class="feature-card card">
+          <h3>来源规则</h3>
           <ul>
             <li>所有动态默认要求标注当日抓取时间</li>
             <li>非当日信息必须明确标红提示</li>
             <li>来源平台、来源类型、抓取时间不可为空</li>
           </ul>
         </div>
-        <div class="profile-section">
-          <h4>建议来源优先级</h4>
+
+        <div class="feature-card card">
+          <h3>建议来源优先级</h3>
           <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
-        <div class="profile-section">
-          <h4>官网 / 公告入口</h4>
+
+        <div class="feature-card card full-span">
+          <h3>官网 / 公告 / 数据源</h3>
           <ul>
-            <li>官网：${getOfficialSource(game.id).officialSite ? `<a class="inline-link" href="${getOfficialSource(game.id).officialSite}" target="_blank" rel="noreferrer">打开官网</a>` : '待补充'}</li>
-            <li>公告：${getOfficialSource(game.id).announcementHub ? `<a class="inline-link" href="${getOfficialSource(game.id).announcementHub}" target="_blank" rel="noreferrer">查看公告入口</a>` : '待补充'}</li>
-            <li>JSON接口：${getOfficialSource(game.id).apiFeed ? `<a class="inline-link" href="${getOfficialSource(game.id).apiFeed}" target="_blank" rel="noreferrer">查看JSON源</a>` : '待补充'}</li>
-            <li>备注：${getOfficialSource(game.id).notes}</li>
+            <li>官网：${source.officialSite ? `<a class="inline-link" href="${source.officialSite}" target="_blank" rel="noreferrer">${source.officialSite}</a>` : '待补充'}</li>
+            <li>公告入口：${source.announcementHub ? `<a class="inline-link" href="${source.announcementHub}" target="_blank" rel="noreferrer">${source.announcementHub}</a>` : '待补充'}</li>
+            <li>JSON接口：${source.apiFeed ? `<a class="inline-link" href="${source.apiFeed}" target="_blank" rel="noreferrer">${source.apiFeed}</a>` : '待补充'}</li>
+            <li>备注：${source.notes}</li>
           </ul>
         </div>
+
+        <div class="feature-card card full-span">
+          <h3>最近动态 / 真实来源流</h3>
+          <div class="timeline-list">
+            ${relatedActivities.map(item => `
+              <div class="timeline-item">
+                <div class="timeline-top">
+                  <span class="meta-pill small">${item.date}</span>
+                  ${badge(item.importance)}
+                  ${freshnessBadge(item.freshness)}
+                </div>
+                <h4>${item.title}</h4>
+                <p class="muted">${item.summary}</p>
+                <div class="timeline-links">
+                  ${item.sourceUrl ? `<a class="inline-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看原始来源</a>` : '<span class="muted">暂无来源链接</span>'}
+                  <span class="muted">${item.sourcePlatform} · ${item.sourceType} · ${item.capturedAt}</span>
+                </div>
+              </div>
+            `).join('') || '<p class="muted">暂无动态</p>'}
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-footer-actions">
+        <button class="detail-btn secondary" data-copy-link="${game.id}">复制链接</button>
+        <button class="detail-btn secondary" data-close-detail="true">关闭</button>
       </div>
     </div>
   `;
