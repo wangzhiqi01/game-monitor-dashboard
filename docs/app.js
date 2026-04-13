@@ -78,6 +78,8 @@ function renderOverview() {
   const { overview, games, activities } = data;
   const staleCount = activities.filter(item => item.freshness !== 'today').length;
   const freshCount = activities.filter(item => item.freshness === 'today').length;
+  const staleGames = games.filter(item => item.freshness !== 'today');
+  const freshGames = games.filter(item => item.freshness === 'today');
   const pools = getPoolStats();
   const hottestGames = [...games].sort((a, b) => b.metrics.heatIndex - a.metrics.heatIndex).slice(0, 3);
   const highActivities = activities.filter(item => item.importance === 'high');
@@ -92,8 +94,8 @@ function renderOverview() {
     <div class="cards" style="margin-top:16px;">
       ${metricCard('当日动态', freshCount, '满足当天来源要求')}
       ${metricCard('非当日动态', staleCount, '需要显式提醒')}
-      ${metricCard('来源注册表', data.sourceRegistry.length, '已定义的来源类型')}
-      ${metricCard('更新目标', '日更', '当前过渡版默认按天维护')}
+      ${metricCard('当日更新游戏', freshGames.length, '按游戏维度完成更新')}
+      ${metricCard('待更新游戏', staleGames.length, '需要继续补当天信息')}
     </div>
 
     <div class="grid-2">
@@ -172,11 +174,9 @@ function renderOverview() {
           </tbody>
         </table>
       `)}
-      ${sectionCard('落地建议', `
+      ${sectionCard('待更新游戏提醒', `
         <div class="list">
-          <div class="list-item"><h4>当前阶段</h4><p>先保证所有动态都有来源、抓取时间、当天标记。</p></div>
-          <div class="list-item"><h4>下一阶段</h4><p>优先接官网公告、B站视频/直播、重点社媒账号。</p></div>
-          <div class="list-item"><h4>目标</h4><p>把“页面能看”推进到“消息可追溯、可审计、可半自动更新”。</p></div>
+          ${staleGames.length ? staleGames.map(item => `<div class="list-item"><h4>${item.name}</h4><p>最后更新时间：${item.lastUpdatedAt}</p></div>`).join('') : '<div class="list-item"><p>当前 9 款重点游戏均为当日更新状态。</p></div>'}
         </div>
       `)}
     </div>
@@ -314,6 +314,8 @@ function renderGames() {
                         <li>研发/发行：${game.developer}</li>
                         <li>核心概述：${game.summary}</li>
                         <li>目标人群：${game.audience}</li>
+                        <li>最后更新时间：${game.lastUpdatedAt}</li>
+                        <li>更新状态：${game.freshness === 'today' ? '当日' : '非当日'}</li>
                       </ul>
                     </div>
                     <div class="profile-section">
@@ -332,6 +334,10 @@ function renderGames() {
                     <div class="profile-section">
                       <h4>当前重点监控</h4>
                       <ul>${game.monitoringFocus.map(item => `<li>${item}</li>`).join('')}</ul>
+                    </div>
+                    <div class="profile-section">
+                      <h4>优先来源</h4>
+                      <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
                     </div>
                   </div>
                 </div>
@@ -393,6 +399,8 @@ function renderGameDetailPanel(game) {
             <li>研发/发行：${game.developer}</li>
             <li>核心概述：${game.summary}</li>
             <li>目标人群：${game.audience}</li>
+            <li>最后更新时间：${game.lastUpdatedAt}</li>
+            <li>更新状态：${game.freshness === 'today' ? '当日' : '非当日'}</li>
           </ul>
         </div>
         <div class="profile-section">
@@ -430,11 +438,7 @@ function renderGameDetailPanel(game) {
         </div>
         <div class="profile-section">
           <h4>建议来源优先级</h4>
-          <ul>
-            <li>优先：官网/官方公告</li>
-            <li>其次：B站视频 / B站直播</li>
-            <li>补充：重点社媒账号 / 业务同步</li>
-          </ul>
+          <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
       </div>
     </div>

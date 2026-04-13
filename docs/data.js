@@ -31,6 +31,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['赛季更新', '金钞项目', '达人传播', '直播讨论度'],
       risks: ['新用户理解成本较高', '福利信息如果讲不清，会直接影响转化效率'],
       opportunities: ['围绕“回本”“现实掉金”叙事持续扩展', '魔兽/刷子游戏用户承接空间大'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', 'B站直播', '业务同步/人工录入'],
       metrics: {
         heatIndex: 82,
         socialVolume: '高',
@@ -52,6 +55,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['版本节奏', '主播/视频传播', '社区争议点', '广告素材方向'],
       risks: ['玩家对平衡性、内容节奏、外挂/环境问题敏感'],
       opportunities: ['可拆解战术射击赛道如何做持续内容热度运营'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 84,
         socialVolume: '高',
@@ -73,6 +79,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['版本活动', 'IP 情怀传播', '社区评价', '回流节点'],
       risks: ['用户对还原度与玩法深度的预期差'],
       opportunities: ['可研究经典 IP 如何做新一轮回流包装'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号'],
       metrics: {
         heatIndex: 71,
         socialVolume: '中高',
@@ -94,6 +103,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['活动福利', '跨界联动', '短视频素材', '社媒热度'],
       risks: ['成熟产品创新疲劳', '活动频次高导致边际感知下降'],
       opportunities: ['适合作为“成熟大盘如何维持热度”的样本'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 90,
         socialVolume: '高',
@@ -115,6 +127,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['版本平衡', '赛事热度', '头部主播内容', '社区争议'],
       risks: ['用户对平衡性极其敏感', '高门槛会影响泛用户扩张'],
       opportunities: ['适合研究竞技产品的内容链路与社区反馈机制'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', 'B站直播', '重点社媒账号'],
       metrics: {
         heatIndex: 86,
         socialVolume: '高',
@@ -136,6 +151,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['版本更新', 'Build 讨论', '社区反馈', 'ARPG 赛道口碑对照'],
       risks: ['复杂度较高', '新用户门槛高'],
       opportunities: ['适合与火炬对照研究“深度 vs 易入门”的平衡点'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'B站视频', '社区论坛/内容观察'],
       metrics: {
         heatIndex: 87,
         socialVolume: '高',
@@ -157,6 +175,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['首曝物料', '预约福利', '社区认知', '达人试水内容'],
       risks: ['玩法差异如果说不清，用户容易只把它当 IP 衍生'],
       opportunities: ['适合研究大 IP 新玩法如何做第一波教育'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'PV/宣传片', '重点社媒账号'],
       metrics: {
         heatIndex: 75,
         socialVolume: '中高',
@@ -178,6 +199,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['PV 传播', '测试节点', '预约节奏', '核心质疑点'],
       risks: ['用户预期极高，舆情波动可能放大'],
       opportunities: ['适合研究高期待新品的预热节奏与舆情管理'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', 'PV/宣传片', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 89,
         socialVolume: '高',
@@ -199,6 +223,9 @@ window.GAME_MONITOR_DATA = {
       monitoringFocus: ['产品定位', '预约传播', '卖点清晰度', '社区第一波反馈'],
       risks: ['产品认知模糊会直接影响预约效率'],
       opportunities: ['适合作为“认知建立期新品”的监控样本'],
+      lastUpdatedAt: '2026-04-13 14:51',
+      freshness: 'today',
+      preferredSources: ['官网/官方公告', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 63,
         socialVolume: '中',
