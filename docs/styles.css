@@ -171,6 +171,8 @@ body {
 .badge.high { color: #fecaca; border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.12); }
 .badge.medium { color: #fde68a; border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.12); }
 .badge.low { color: #bbf7d0; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); }
+.badge.fresh { color: #bbf7d0; border-color: rgba(34,197,94,.4); background: rgba(34,197,94,.12); }
+.badge.stale { color: #fecaca; border-color: rgba(239,68,68,.4); background: rgba(239,68,68,.12); }
 
 .list {
   display: grid;

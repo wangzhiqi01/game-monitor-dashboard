@@ -28,6 +28,11 @@ function metricCard(title, value, note) {
   return `<div class="card"><h3>${title}</h3><div class="metric">${value}</div><div class="muted">${note}</div></div>`;
 }
 
+function freshnessBadge(value) {
+  if (value === 'today') return '<span class="badge fresh">当日</span>';
+  return '<span class="badge stale">非当日</span>';
+}
+
 function sectionCard(title, body) {
   return `<div class="card"><h3 class="section-title">${title}</h3>${body}</div>`;
 }
@@ -139,6 +144,7 @@ function renderOverview() {
           <div class="profile-section"><h4>人工维护</h4><ul>${data.updateMechanism.manual.map(item => `<li>${item}</li>`).join('')}</ul></div>
           <div class="profile-section"><h4>我持续维护模板</h4><ul>${data.updateMechanism.assistant.map(item => `<li>${item}</li>`).join('')}</ul></div>
           <div class="profile-section"><h4>后续可接抓取</h4><ul>${data.updateMechanism.futureAutomation.map(item => `<li>${item}</li>`).join('')}</ul></div>
+          <div class="profile-section"><h4>来源规则</h4><ul><li>${data.updateMechanism.sourceRule}</li></ul></div>
         </div>
       `)}
     </div>
@@ -216,7 +222,7 @@ function renderActivity() {
     <div class="card" style="margin-top:16px;">
       <h3 class="section-title">重点动态流</h3>
       <table class="table">
-        <thead><tr><th>日期</th><th>游戏</th><th>平台</th><th>类型</th><th>优先级</th><th>摘要</th></tr></thead>
+        <thead><tr><th>日期</th><th>游戏</th><th>平台</th><th>类型</th><th>优先级</th><th>来源</th><th>摘要</th></tr></thead>
         <tbody>
           ${filtered.map(item => `
             <tr>
@@ -225,9 +231,14 @@ function renderActivity() {
               <td>${item.platform}</td>
               <td>${item.category}</td>
               <td>${badge(item.importance)}</td>
+              <td>
+                ${freshnessBadge(item.freshness)}<br />
+                <span class="muted">${item.sourcePlatform}</span><br />
+                <span class="muted">${item.sourceType} · ${item.capturedAt}</span>
+              </td>
               <td><strong>${item.title}</strong><br /><span class="muted">${item.summary}</span></td>
             </tr>
-          `).join('') || '<tr><td colspan="6" class="muted">当前筛选条件下暂无动态。</td></tr>'}
+          `).join('') || '<tr><td colspan="7" class="muted">当前筛选条件下暂无动态。</td></tr>'}
         </tbody>
       </table>
     </div>
@@ -376,6 +387,14 @@ function renderGameDetailPanel(game) {
         <div class="profile-section">
           <h4>机会点</h4>
           <ul>${game.opportunities.map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+        <div class="profile-section">
+          <h4>最近来源要求</h4>
+          <ul>
+            <li>所有动态默认要求标注当日抓取时间</li>
+            <li>非当日信息必须明确标红提示</li>
+            <li>来源平台、来源类型、抓取时间不可为空</li>
+          </ul>
         </div>
       </div>
     </div>

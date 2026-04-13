@@ -209,76 +209,116 @@ window.GAME_MONITOR_DATA = {
   ],
   activities: [
     {
-      date: '2026-04-10',
+      date: '2026-04-13',
       game: '火炬之光：无限',
       platform: '端游/手游',
       category: '营销动作',
       title: 'SS12 金钞项目继续推进达人内容合作',
       importance: 'high',
-      summary: '重点围绕“金钞获取机制”“回坑理由”“中国美院共创”三层信息展开达人传播。'
+      summary: '重点围绕“金钞获取机制”“回坑理由”“中国美院共创”三层信息展开达人传播。',
+      sourcePlatform: '人工录入 / 业务同步',
+      sourceType: '业务情报',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-10',
+      date: '2026-04-13',
       game: '流放之路2',
       platform: '端游',
       category: '赛道对照',
       title: 'ARPG 核心用户讨论继续集中在深度与门槛平衡',
       importance: 'medium',
-      summary: '适合与火炬之光：无限对照分析“易入门叙事 vs 深度叙事”如何影响传播。'
+      summary: '适合与火炬之光：无限对照分析“易入门叙事 vs 深度叙事”如何影响传播。',
+      sourcePlatform: '人工录入 / 竞品观察',
+      sourceType: '赛道观察',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-09',
+      date: '2026-04-13',
       game: '王者荣耀世界',
       platform: '端游/手游',
       category: '预约/预热',
       title: '高关注新品进入物料与预期管理双重观察期',
       importance: 'high',
-      summary: '后续需重点记录 PV 表现、评论关键词和测试节点前的舆情走向。'
+      summary: '后续需重点记录 PV 表现、评论关键词和测试节点前的舆情走向。',
+      sourcePlatform: '人工录入 / 预约监控',
+      sourceType: '新品观察',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-09',
+      date: '2026-04-13',
       game: '三角洲行动',
       platform: '端游/手游',
       category: '社区口碑',
       title: '玩家对版本内容与竞技环境持续讨论',
       importance: 'medium',
-      summary: '适合跟踪其内容更新是否带动正向讨论，还是继续累积环境类抱怨。'
+      summary: '适合跟踪其内容更新是否带动正向讨论，还是继续累积环境类抱怨。',
+      sourcePlatform: '人工录入 / 社区观察',
+      sourceType: '社区舆情',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-08',
+      date: '2026-04-13',
       game: '和平精英',
       platform: '手游',
       category: '营销动作',
       title: '成熟产品依旧保持高频活动与联动打法',
       importance: 'medium',
-      summary: '值得持续拆解其活动包装、素材节奏和大众传播语言。'
+      summary: '值得持续拆解其活动包装、素材节奏和大众传播语言。',
+      sourcePlatform: '人工录入 / 竞品观察',
+      sourceType: '营销监控',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-08',
+      date: '2026-04-13',
       game: '无畏契约',
       platform: '端游',
       category: '赛事/主播',
       title: '竞技内容与主播讨论继续拉动社区热度',
       importance: 'medium',
-      summary: '重点观察版本平衡、赛事热点与内容创作者话题之间的联动。'
+      summary: '重点观察版本平衡、赛事热点与内容创作者话题之间的联动。',
+      sourcePlatform: '人工录入 / 内容观察',
+      sourceType: '赛事内容',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-07',
+      date: '2026-04-13',
       game: '王者万象棋',
       platform: '手游',
       category: '预约/预热',
       title: '新品玩法认知建立期，适合记录用户第一印象',
       importance: 'medium',
-      summary: '需要重点观察用户到底是冲玩法来，还是主要由王者 IP 驱动关注。'
+      summary: '需要重点观察用户到底是冲玩法来，还是主要由王者 IP 驱动关注。',
+      sourcePlatform: '人工录入 / 预约监控',
+      sourceType: '新品观察',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     },
     {
-      date: '2026-04-07',
+      date: '2026-04-13',
       game: '失控进化',
       platform: '端游/手游',
       category: '定位观察',
       title: '题材与核心卖点仍在形成认知',
       importance: 'low',
-      summary: '现阶段重点不是看绝对热度，而是看“用户是否知道它是什么”。'
+      summary: '现阶段重点不是看绝对热度，而是看“用户是否知道它是什么”。',
+      sourcePlatform: '人工录入 / 新品观察',
+      sourceType: '产品定位',
+      sourceUrl: '',
+      capturedAt: '2026-04-13 14:51',
+      freshness: 'today'
     }
   ],
   cases: [
@@ -325,6 +365,7 @@ window.GAME_MONITOR_DATA = {
       '版本公告与活动公告收集',
       '搜索热度与素材趋势同步',
       '定时生成周报/晨报底稿'
-    ]
+    ],
+    sourceRule: '默认要求每条动态标注当日抓取时间 capturedAt；如不是当天信息，必须显式标注 freshness=stale 并提示非当日。'
   }
 };
