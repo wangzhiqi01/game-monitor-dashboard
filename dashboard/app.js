@@ -8,6 +8,11 @@ const state = {
     status: '全部',
     category: '全部'
   },
+  quick: {
+    freshness: '全部',
+    priority: '全部',
+    linkStatus: '全部'
+  },
   search: '',
   selectedGameId: null
 };
@@ -180,6 +185,21 @@ function renderOverview() {
         </div>
       `)}
     </div>
+
+    <div class="grid-2">
+      ${sectionCard('抓取接口位', `
+        <div class="list">
+          ${data.fetchPipelines.map(item => `<div class="list-item"><h4>${item.name}</h4><p>状态：${item.status} / 目标：${item.target}</p><p>${item.nextStep}</p></div>`).join('')}
+        </div>
+      `)}
+      ${sectionCard('第四轮重点', `
+        <div class="list">
+          <div class="list-item"><h4>异常提醒</h4><p>游戏层已支持最后更新时间与待更新提醒。</p></div>
+          <div class="list-item"><h4>快捷筛选</h4><p>动态页支持只看当日、只看高优、只看缺链接。</p></div>
+          <div class="list-item"><h4>接口位</h4><p>已为官网公告与 B站视频/直播预留接入位。</p></div>
+        </div>
+      `)}
+    </div>
   `;
 }
 
@@ -197,7 +217,18 @@ function filterActivities() {
     const matchStatus = state.filters.status === '全部' || game?.status === state.filters.status;
     const matchPool = state.filters.pool === '全部' || game?.pool === state.filters.pool;
     const matchSearch = !state.search.trim() || [item.game, item.title, item.summary, item.category].join(' ').toLowerCase().includes(state.search.trim().toLowerCase());
-    return matchPlatform && matchCategory && matchStatus && matchPool && matchSearch;
+    const matchFreshness = state.quick.freshness === '全部'
+      || (state.quick.freshness === '只看当日' && item.freshness === 'today')
+      || (state.quick.freshness === '只看非当日' && item.freshness !== 'today');
+    const matchPriority = state.quick.priority === '全部'
+      || (state.quick.priority === '只看高优' && item.importance === 'high')
+      || (state.quick.priority === '只看中优' && item.importance === 'medium')
+      || (state.quick.priority === '只看低优' && item.importance === 'low');
+    const hasLink = !!item.sourceUrl;
+    const matchLink = state.quick.linkStatus === '全部'
+      || (state.quick.linkStatus === '只看缺链接' && !hasLink)
+      || (state.quick.linkStatus === '只看有链接' && hasLink);
+    return matchPlatform && matchCategory && matchStatus && matchPool && matchSearch && matchFreshness && matchPriority && matchLink;
   });
 }
 
@@ -216,6 +247,11 @@ function renderFilters(type) {
 
   return `
     <div class="filter-wrap">
+      <div class="quick-filter-row">
+        ${data.quickFilters.freshness.map(item => `<button class="quick-filter ${state.quick.freshness === item ? 'active' : ''}" data-quick-kind="freshness" data-quick-value="${item}">${item}</button>`).join('')}
+        ${data.quickFilters.priority.map(item => `<button class="quick-filter ${state.quick.priority === item ? 'active' : ''}" data-quick-kind="priority" data-quick-value="${item}">${item}</button>`).join('')}
+        ${data.quickFilters.linkStatus.map(item => `<button class="quick-filter ${state.quick.linkStatus === item ? 'active' : ''}" data-quick-kind="linkStatus" data-quick-value="${item}">${item}</button>`).join('')}
+      </div>
       <div class="filter-bar card">
         <label class="filter-item filter-search">
           <span>搜索</span>
@@ -509,6 +545,7 @@ function activateView(view) {
 
 function resetFilters() {
   state.filters = { pool: '全部', platform: '全部', status: '全部', category: '全部' };
+  state.quick = { freshness: '全部', priority: '全部', linkStatus: '全部' };
   state.search = '';
   renderCurrentView();
 }
@@ -545,6 +582,13 @@ function bindGlobalEvents() {
     const reset = event.target.closest('#reset-filters');
     if (reset) {
       resetFilters();
+      return;
+    }
+
+    const quick = event.target.closest('[data-quick-kind]');
+    if (quick) {
+      state.quick[quick.dataset.quickKind] = quick.dataset.quickValue;
+      renderCurrentView();
       return;
     }
 

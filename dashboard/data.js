@@ -33,6 +33,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['围绕“回本”“现实掉金”叙事持续扩展', '魔兽/刷子游戏用户承接空间大'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', 'B站直播', '业务同步/人工录入'],
       metrics: {
         heatIndex: 82,
@@ -57,6 +58,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['可拆解战术射击赛道如何做持续内容热度运营'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 84,
@@ -81,6 +83,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['可研究经典 IP 如何做新一轮回流包装'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号'],
       metrics: {
         heatIndex: 71,
@@ -105,6 +108,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合作为“成熟大盘如何维持热度”的样本'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 90,
@@ -129,6 +133,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合研究竞技产品的内容链路与社区反馈机制'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', 'B站直播', '重点社媒账号'],
       metrics: {
         heatIndex: 86,
@@ -153,6 +158,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合与火炬对照研究“深度 vs 易入门”的平衡点'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'B站视频', '社区论坛/内容观察'],
       metrics: {
         heatIndex: 87,
@@ -177,6 +183,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合研究大 IP 新玩法如何做第一波教育'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'PV/宣传片', '重点社媒账号'],
       metrics: {
         heatIndex: 75,
@@ -201,6 +208,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合研究高期待新品的预热节奏与舆情管理'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', 'PV/宣传片', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 89,
@@ -225,6 +233,7 @@ window.GAME_MONITOR_DATA = {
       opportunities: ['适合作为“认知建立期新品”的监控样本'],
       lastUpdatedAt: '2026-04-13 14:51',
       freshness: 'today',
+      updateAlert: 'normal',
       preferredSources: ['官网/官方公告', '重点社媒账号', '业务同步/人工录入'],
       metrics: {
         heatIndex: 63,
@@ -282,6 +291,29 @@ window.GAME_MONITOR_DATA = {
     ],
     sourceRule: '默认要求每条动态标注当日抓取时间 capturedAt；如不是当天信息，必须显式标注 freshness=stale 并提示非当日。'
   },
+  quickFilters: {
+    freshness: ['全部', '只看当日', '只看非当日'],
+    priority: ['全部', '只看高优', '只看中优', '只看低优'],
+    linkStatus: ['全部', '只看缺链接', '只看有链接']
+  },
+  fetchPipelines: [
+    {
+      id: 'official-announcement-pipeline',
+      name: '官网/公告抓取接口位',
+      status: 'planned',
+      target: '官网公告 / 版本公告 / 活动公告',
+      output: '标准化动态记录',
+      nextStep: '为 9 款游戏补各自官网/公告入口'
+    },
+    {
+      id: 'bilibili-monitor-pipeline',
+      name: 'B站视频/直播抓取接口位',
+      status: 'planned',
+      target: '视频更新 / 直播动态 / 达人内容',
+      output: '标准化动态记录',
+      nextStep: '先接火炬之光：无限与重点竞品的B站入口'
+    }
+  ],
   sourceRegistry: [
     { key: 'official-announcement', name: '官网/官方公告', mode: 'future-automation', freshnessTarget: 'daily' },
     { key: 'bilibili-video', name: 'B站视频', mode: 'future-automation', freshnessTarget: 'daily' },
