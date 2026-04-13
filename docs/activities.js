@@ -14,7 +14,25 @@ window.GAME_MONITOR_ACTIVITIES = [
     sourceUrl: 'https://torchlight.xd.com/us/news/list',
     capturedAt: '2026-04-13 15:34',
     freshness: 'today',
-    todo: '下一步继续细化公告列表的条目提取方式，并确认是否存在可直接定位单条公告的 URL 结构',
+    todo: '已确认列表页存在分类结构（Featured / Announcement / Events）；下一步继续定位单条公告 URL 规律并拆出 2-3 条样板公告',
+    owner: '大飞哥'
+  },
+  {
+    id: 'act-torchlight-20260413-02',
+    date: '2026-04-13',
+    game: '火炬之光：无限',
+    gameId: 'torchlight-infinite',
+    platform: '端游/手游',
+    category: '版本更新',
+    title: '公告列表页已确认存在分类结构，可进入条目级拆解阶段',
+    importance: 'high',
+    summary: '通过直接抓取 HTML，已确认新闻列表页存在 Featured / Announcement / Events 分类结构，说明后续可继续尝试提取单条公告信息。',
+    sourcePlatform: '官网 / 新闻列表 HTML',
+    sourceType: '条目级拆解验证',
+    sourceUrl: 'https://torchlight.xd.com/us/news/list',
+    capturedAt: '2026-04-13 15:34',
+    freshness: 'today',
+    todo: '继续识别列表页中的公告项链接规律，优先拆 2-3 条公告样板',
     owner: '大飞哥'
   },
   {
