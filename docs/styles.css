@@ -181,8 +181,12 @@ body {
 .feature-card {
   min-height: 100%;
 }
+.compact-card {
+  padding: 16px;
+}
 .feature-card h3 {
   margin-bottom: 12px;
+  font-size: 16px;
 }
 .tone-risk {
   border-color: rgba(239,68,68,.35);
@@ -232,6 +236,7 @@ body {
 }
 .timeline-item h4 {
   margin: 10px 0 8px;
+  font-size: 16px;
 }
 .timeline-top {
   display: flex;
@@ -308,6 +313,16 @@ body {
 }
 .metric-card {
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+}
+.metric-label {
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.activity-stream-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.012));
 }
 .card h3, .section-title, .profile-section h4 {
   margin-top: 0;

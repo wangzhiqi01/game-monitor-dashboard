@@ -30,7 +30,7 @@ function badge(level) {
 }
 
 function metricCard(title, value, note) {
-  return `<div class="card metric-card"><h3>${title}</h3><div class="metric">${value}</div><div class="muted">${note}</div></div>`;
+  return `<div class="card metric-card"><div class="metric-label">${title}</div><div class="metric">${value}</div><div class="muted">${note}</div></div>`;
 }
 
 function freshnessBadge(value) {
@@ -524,8 +524,8 @@ function renderGameDetailPanel(game) {
       </div>
 
       <div class="detail-grid">
-        <div class="feature-card card">
-          <h3>核心判断</h3>
+          <div class="feature-card card compact-card">
+            <h3>核心判断</h3>
           <ul>
             <li>研发/发行：${game.developer}</li>
             <li>目标人群：${game.audience}</li>
@@ -534,7 +534,7 @@ function renderGameDetailPanel(game) {
           </ul>
         </div>
 
-        <div class="feature-card card">
+        <div class="feature-card card compact-card">
           <h3>核心指标</h3>
           <ul>
             <li>热度指数：${game.metrics.heatIndex}</li>
@@ -544,27 +544,27 @@ function renderGameDetailPanel(game) {
           </ul>
         </div>
 
-        <div class="feature-card card">
+        <div class="feature-card card compact-card">
           <h3>核心卖点</h3>
           <ul>${game.coreSellingPoints.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
 
-        <div class="feature-card card">
+        <div class="feature-card card compact-card">
           <h3>当前重点监控</h3>
           <ul>${game.monitoringFocus.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
 
-        <div class="feature-card card tone-risk">
+        <div class="feature-card card compact-card tone-risk">
           <h3>风险点</h3>
           <ul>${game.risks.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
 
-        <div class="feature-card card tone-opportunity">
+        <div class="feature-card card compact-card tone-opportunity">
           <h3>机会点</h3>
           <ul>${game.opportunities.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
 
-        <div class="feature-card card">
+        <div class="feature-card card compact-card">
           <h3>来源规则</h3>
           <ul>
             <li>所有动态默认要求标注当日抓取时间</li>
@@ -573,7 +573,7 @@ function renderGameDetailPanel(game) {
           </ul>
         </div>
 
-        <div class="feature-card card">
+        <div class="feature-card card compact-card">
           <h3>建议来源优先级</h3>
           <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
