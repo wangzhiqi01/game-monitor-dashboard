@@ -367,5 +367,12 @@ window.GAME_MONITOR_DATA = {
       '定时生成周报/晨报底稿'
     ],
     sourceRule: '默认要求每条动态标注当日抓取时间 capturedAt；如不是当天信息，必须显式标注 freshness=stale 并提示非当日。'
-  }
+  },
+  sourceRegistry: [
+    { key: 'official-announcement', name: '官网/官方公告', mode: 'future-automation', freshnessTarget: 'daily' },
+    { key: 'bilibili-video', name: 'B站视频', mode: 'future-automation', freshnessTarget: 'daily' },
+    { key: 'bilibili-live', name: 'B站直播', mode: 'future-automation', freshnessTarget: 'daily' },
+    { key: 'social-account', name: '重点社媒账号', mode: 'future-automation', freshnessTarget: 'daily' },
+    { key: 'manual-biz', name: '业务同步/人工录入', mode: 'manual', freshnessTarget: 'same-day' }
+  ]
 };

@@ -76,6 +76,8 @@ function renderUpdateMechanismSidebar() {
 
 function renderOverview() {
   const { overview, games, activities } = data;
+  const staleCount = activities.filter(item => item.freshness !== 'today').length;
+  const freshCount = activities.filter(item => item.freshness === 'today').length;
   const pools = getPoolStats();
   const hottestGames = [...games].sort((a, b) => b.metrics.heatIndex - a.metrics.heatIndex).slice(0, 3);
   const highActivities = activities.filter(item => item.importance === 'high');
@@ -86,6 +88,12 @@ function renderOverview() {
       ${metricCard('已上线重点', overview.launchedGames, '成熟产品与竞品观察池')}
       ${metricCard('预约中重点', overview.upcomingGames, '需盯预热与测试节奏')}
       ${metricCard('本周关键更新', overview.keyUpdatesThisWeek, '版本 / 赛季 / 活动')}
+    </div>
+    <div class="cards" style="margin-top:16px;">
+      ${metricCard('当日动态', freshCount, '满足当天来源要求')}
+      ${metricCard('非当日动态', staleCount, '需要显式提醒')}
+      ${metricCard('来源注册表', data.sourceRegistry.length, '已定义的来源类型')}
+      ${metricCard('更新目标', '日更', '当前过渡版默认按天维护')}
     </div>
 
     <div class="grid-2">
@@ -145,6 +153,30 @@ function renderOverview() {
           <div class="profile-section"><h4>我持续维护模板</h4><ul>${data.updateMechanism.assistant.map(item => `<li>${item}</li>`).join('')}</ul></div>
           <div class="profile-section"><h4>后续可接抓取</h4><ul>${data.updateMechanism.futureAutomation.map(item => `<li>${item}</li>`).join('')}</ul></div>
           <div class="profile-section"><h4>来源规则</h4><ul><li>${data.updateMechanism.sourceRule}</li></ul></div>
+        </div>
+      `)}
+    </div>
+
+    <div class="grid-2">
+      ${sectionCard('来源注册表', `
+        <table class="table">
+          <thead><tr><th>来源名称</th><th>模式</th><th>更新目标</th></tr></thead>
+          <tbody>
+            ${data.sourceRegistry.map(item => `
+              <tr>
+                <td>${item.name}</td>
+                <td>${item.mode === 'manual' ? '人工' : '后续自动化'}</td>
+                <td>${item.freshnessTarget}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `)}
+      ${sectionCard('落地建议', `
+        <div class="list">
+          <div class="list-item"><h4>当前阶段</h4><p>先保证所有动态都有来源、抓取时间、当天标记。</p></div>
+          <div class="list-item"><h4>下一阶段</h4><p>优先接官网公告、B站视频/直播、重点社媒账号。</p></div>
+          <div class="list-item"><h4>目标</h4><p>把“页面能看”推进到“消息可追溯、可审计、可半自动更新”。</p></div>
         </div>
       `)}
     </div>
@@ -394,6 +426,14 @@ function renderGameDetailPanel(game) {
             <li>所有动态默认要求标注当日抓取时间</li>
             <li>非当日信息必须明确标红提示</li>
             <li>来源平台、来源类型、抓取时间不可为空</li>
+          </ul>
+        </div>
+        <div class="profile-section">
+          <h4>建议来源优先级</h4>
+          <ul>
+            <li>优先：官网/官方公告</li>
+            <li>其次：B站视频 / B站直播</li>
+            <li>补充：重点社媒账号 / 业务同步</li>
           </ul>
         </div>
       </div>
