@@ -484,6 +484,7 @@ function renderGameDetailPanel(game) {
   const relatedActivities = data.activities.filter(item => item.gameId === game.id).slice(0, 6);
   const freshCount = relatedActivities.filter(item => item.freshness === 'today').length;
   const isTorchlight = game.id === 'torchlight-infinite';
+  const highPriorityCount = relatedActivities.filter(item => item.importance === 'high').length;
   return `
     <div class="detail-panel v2-panel ${isTorchlight ? 'showcase-page' : ''}">
       <div class="hero-panel ${isTorchlight ? 'torchlight-hero' : ''}">
@@ -518,6 +519,10 @@ function renderGameDetailPanel(game) {
             <strong>${freshCount} 条</strong>
           </div>
           <div class="stat-box">
+            <span class="stat-label">高优动态</span>
+            <strong>${highPriorityCount} 条</strong>
+          </div>
+          <div class="stat-box">
             <span class="stat-label">热度指数</span>
             <strong>${game.metrics.heatIndex}</strong>
           </div>
@@ -539,7 +544,18 @@ function renderGameDetailPanel(game) {
             <p>既能作为 ARPG 赛道深度样本，也能作为福利包装、达人传播与回流叙事的研究样板。</p>
           </div>
         </div>
-      ` : ''}
+      ` : `
+        <div class="mini-highlight-row">
+          <div class="mini-highlight card">
+            <h3>研究重点</h3>
+            <p>${game.monitoringFocus.slice(0, 3).join(' / ')}</p>
+          </div>
+          <div class="mini-highlight card">
+            <h3>优先来源</h3>
+            <p>${game.preferredSources.slice(0, 3).join(' / ')}</p>
+          </div>
+        </div>
+      `}
 
       <div class="detail-grid">
           <div class="feature-card card compact-card">
@@ -624,6 +640,24 @@ function renderGameDetailPanel(game) {
                 </div>
               </div>
             `).join('') || '<p class="muted">暂无动态</p>'}
+          </div>
+        </div>
+
+        <div class="feature-card card full-span compact-card">
+          <h3>研究结论摘要</h3>
+          <div class="summary-grid">
+            <div class="summary-box">
+              <span class="summary-title">为什么值得盯</span>
+              <p>${game.coreSellingPoints[0]}，并且${game.monitoringFocus[0]}、${game.monitoringFocus[1] || game.monitoringFocus[0]}能持续提供研究价值。</p>
+            </div>
+            <div class="summary-box">
+              <span class="summary-title">当前风险</span>
+              <p>${game.risks[0]}</p>
+            </div>
+            <div class="summary-box">
+              <span class="summary-title">当前机会</span>
+              <p>${game.opportunities[0]}</p>
+            </div>
           </div>
         </div>
       </div>

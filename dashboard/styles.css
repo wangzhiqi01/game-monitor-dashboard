@@ -187,6 +187,15 @@ body {
   gap: 16px;
   margin-bottom: 16px;
 }
+.mini-highlight-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.mini-highlight {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+}
 .highlight-card {
   padding: 18px;
   border-radius: 16px;
@@ -277,6 +286,30 @@ body {
 .showcase-source-card,
 .showcase-timeline-card {
   background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015));
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.summary-box {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,.18);
+  background: rgba(255,255,255,.02);
+}
+.summary-title {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.summary-box p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.8;
 }
 .timeline-item h4 {
   margin: 10px 0 8px;
@@ -619,6 +652,7 @@ body {
   .hero-panel, .detail-grid, .hero-side { grid-template-columns: 1fr; }
   .overview-hero { grid-template-columns: 1fr; }
   .highlight-band { grid-template-columns: 1fr; }
+  .mini-highlight-row, .summary-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
