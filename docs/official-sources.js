@@ -8,7 +8,7 @@ window.GAME_MONITOR_OFFICIAL_SOURCES = {
   'delta-force': {
     officialSite: 'https://df.qq.com/',
     announcementHub: 'https://df.qq.com/',
-    notes: '优先关注官网新闻、版本公告、活动页。'
+    notes: '已验证官网可拉取；下一步优先确认新闻/公告页入口，并处理当前文本编码问题。'
   },
   'rock-kingdom': {
     officialSite: 'https://17roco.qq.com/',

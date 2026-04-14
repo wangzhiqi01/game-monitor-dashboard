@@ -171,6 +171,24 @@ window.GAME_MONITOR_ACTIVITIES = [
     owner: '大飞哥'
   },
   {
+    id: 'act-delta-20260414-00',
+    date: '2026-04-14',
+    game: '三角洲行动',
+    gameId: 'delta-force',
+    platform: '端游/手游',
+    category: '版本更新',
+    title: '官网真实来源已验证，可作为第二个研究样板入口',
+    importance: 'high',
+    summary: '已验证三角洲行动官网可拉取真实页面内容，说明这套“官网入口—来源验证—研究页接入”的方法可以复制到第二个游戏。当前抓取文本存在编码问题，下一步需优先解决内容解码与公告入口定位。',
+    sourcePlatform: '官网 / 官方站点',
+    sourceType: '第二样板来源验证',
+    sourceUrl: 'https://df.qq.com/',
+    capturedAt: '2026-04-14 11:59',
+    freshness: 'today',
+    todo: '继续确认公告页/新闻页入口，并解决当前文本编码问题',
+    owner: '大飞哥'
+  },
+  {
     id: 'act-delta-20260413-01',
     date: '2026-04-13',
     game: '三角洲行动',
