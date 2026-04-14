@@ -486,7 +486,7 @@ function renderGameDetailPanel(game) {
   const isTorchlight = game.id === 'torchlight-infinite';
   const highPriorityCount = relatedActivities.filter(item => item.importance === 'high').length;
   const groupedSubTypes = relatedActivities.reduce((acc, item) => {
-    const key = item.subType || item.category;
+    const key = item.researchTag || item.subType || item.category;
     acc[key] = (acc[key] || 0) + 1;
     return acc;
   }, {});
@@ -636,6 +636,7 @@ function renderGameDetailPanel(game) {
                   <span class="meta-pill small">${item.date}</span>
                   ${badge(item.importance)}
                   ${freshnessBadge(item.freshness)}
+                  ${item.researchTag ? `<span class="meta-pill small">${item.researchTag}</span>` : ''}
                 </div>
                 <h4>${item.title}</h4>
                 <p class="muted">${item.summary}</p>
