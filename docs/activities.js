@@ -98,13 +98,13 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Whispering Mist] Event Announcement',
     importance: 'medium',
-    summary: '来自火炬官网 JSON 源的真实活动公告条目，可用于验证公告流的历史样本结构。',
+    summary: '真实公告摘要：可通过签到获取 Legendary Drop Pactspirit 相关奖励与 Activation Medium，并围绕赛季活动继续参与刷图与奖励获取。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=1ffdcuamXC0B',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '后续补正文摘要，并标注其所属赛季背景',
+    todo: '继续补该公告的完整正文拆解，并标注 Whispering Mist 赛季背景与活动机制',
     owner: '大飞哥'
   },
   {
@@ -116,13 +116,13 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Whispering Mist] Boon Announcement',
     importance: 'medium',
-    summary: '来自火炬官网 JSON 源的真实福利公告条目，适合用来搭建“公告标题—时间—链接—摘要”的标准结构。',
+    summary: '真实公告摘要：围绕 Legendary Drop Pactspirit、Activation Medium 与 Commemorative Gold Notes 等奖励机制展开，是典型的福利向公告样板。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=b2u19uan4vtg',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '后续补福利内容概述，并与活动公告做配对展示',
+    todo: '继续补福利条款细节，并与同赛季活动公告做配对展示',
     owner: '大飞哥'
   },
   {
