@@ -483,9 +483,10 @@ function renderGameDetailPanel(game) {
   const source = getOfficialSource(game.id);
   const relatedActivities = data.activities.filter(item => item.gameId === game.id).slice(0, 6);
   const freshCount = relatedActivities.filter(item => item.freshness === 'today').length;
+  const isTorchlight = game.id === 'torchlight-infinite';
   return `
-    <div class="detail-panel v2-panel">
-      <div class="hero-panel">
+    <div class="detail-panel v2-panel ${isTorchlight ? 'showcase-page' : ''}">
+      <div class="hero-panel ${isTorchlight ? 'torchlight-hero' : ''}">
         <div class="hero-main">
           <div class="hero-kicker">V2.0 研究型游戏情报页</div>
           <h2>${game.name}</h2>
@@ -522,6 +523,23 @@ function renderGameDetailPanel(game) {
           </div>
         </div>
       </div>
+
+      ${isTorchlight ? `
+        <div class="highlight-band">
+          <div class="highlight-card tone-gold">
+            <h3>版本传播主线</h3>
+            <p>当前最值得关注的是 SS12 节点下的“金钞项目 + 中国美院共创 + 刷图参与感”这条传播链。</p>
+          </div>
+          <div class="highlight-card tone-blue">
+            <h3>核心体验关键词</h3>
+            <p>暗黑打宝、刷图爽感、BD构筑、赛季更新、回流理由、现实奖励延展。</p>
+          </div>
+          <div class="highlight-card tone-purple">
+            <h3>当前研究价值</h3>
+            <p>既能作为 ARPG 赛道深度样本，也能作为福利包装、达人传播与回流叙事的研究样板。</p>
+          </div>
+        </div>
+      ` : ''}
 
       <div class="detail-grid">
           <div class="feature-card card compact-card">
@@ -578,7 +596,7 @@ function renderGameDetailPanel(game) {
           <ul>${game.preferredSources.map(item => `<li>${item}</li>`).join('')}</ul>
         </div>
 
-        <div class="feature-card card full-span">
+        <div class="feature-card card full-span ${isTorchlight ? 'showcase-source-card' : ''}">
           <h3>官网 / 公告 / 数据源</h3>
           <ul>
             <li>官网：${source.officialSite ? `<a class="inline-link" href="${source.officialSite}" target="_blank" rel="noreferrer">${source.officialSite}</a>` : '待补充'}</li>
@@ -588,11 +606,11 @@ function renderGameDetailPanel(game) {
           </ul>
         </div>
 
-        <div class="feature-card card full-span">
+        <div class="feature-card card full-span ${isTorchlight ? 'showcase-timeline-card' : ''}">
           <h3>最近动态 / 真实来源流</h3>
           <div class="timeline-list">
             ${relatedActivities.map(item => `
-              <div class="timeline-item">
+              <div class="timeline-item research-timeline-item ${item.importance === 'high' ? 'timeline-emphasis' : ''}">
                 <div class="timeline-top">
                   <span class="meta-pill small">${item.date}</span>
                   ${badge(item.importance)}
