@@ -485,6 +485,11 @@ function renderGameDetailPanel(game) {
   const freshCount = relatedActivities.filter(item => item.freshness === 'today').length;
   const isTorchlight = game.id === 'torchlight-infinite';
   const highPriorityCount = relatedActivities.filter(item => item.importance === 'high').length;
+  const groupedSubTypes = relatedActivities.reduce((acc, item) => {
+    const key = item.subType || item.category;
+    acc[key] = (acc[key] || 0) + 1;
+    return acc;
+  }, {});
   return `
     <div class="detail-panel v2-panel ${isTorchlight ? 'showcase-page' : ''}">
       <div class="hero-panel ${isTorchlight ? 'torchlight-hero' : ''}">
@@ -642,6 +647,20 @@ function renderGameDetailPanel(game) {
             `).join('') || '<p class="muted">暂无动态</p>'}
           </div>
         </div>
+
+        ${isTorchlight ? `
+          <div class="feature-card card full-span compact-card">
+            <h3>公告分类整理</h3>
+            <div class="summary-grid">
+              ${Object.entries(groupedSubTypes).map(([key, value]) => `
+                <div class="summary-box">
+                  <span class="summary-title">${key}</span>
+                  <p>当前已收录 ${value} 条真实公告样板，可继续沿该分类补充历史条目与正文摘要。</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
 
         <div class="feature-card card full-span compact-card">
           <h3>研究结论摘要</h3>

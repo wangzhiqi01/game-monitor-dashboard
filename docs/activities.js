@@ -87,7 +87,8 @@ window.GAME_MONITOR_ACTIVITIES = [
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
     todo: '继续补充公告正文的完整机制拆解，并与 SS12 金钞传播链做映射',
-    owner: '大飞哥'
+    owner: '大飞哥',
+    subType: 'Event Announcement'
   },
   {
     id: 'act-torchlight-real-20240419-01',
@@ -105,7 +106,8 @@ window.GAME_MONITOR_ACTIVITIES = [
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
     todo: '继续补该公告的完整正文拆解，并标注 Whispering Mist 赛季背景与活动机制',
-    owner: '大飞哥'
+    owner: '大飞哥',
+    subType: 'Event Announcement'
   },
   {
     id: 'act-torchlight-real-20240419-02',
@@ -123,7 +125,8 @@ window.GAME_MONITOR_ACTIVITIES = [
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
     todo: '继续补福利条款细节，并与同赛季活动公告做配对展示',
-    owner: '大飞哥'
+    owner: '大飞哥',
+    subType: 'Boon Announcement'
   },
   {
     id: 'act-poe2-20260413-01',
