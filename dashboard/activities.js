@@ -80,13 +80,13 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Sandlord] Gold Rush Event Announcement',
     importance: 'high',
-    summary: '来自火炬官网 JSON 源的真实活动公告条目，可作为后续公告流结构化样板。',
+    summary: '真实公告摘要：可通过签到与赛季活动获取多次 Pactspirit 抽取机会、Activation Medium，并可通过刷图参与抽取纪念金钞。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=pidg8uIC7DE6',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '后续补该公告的正文摘要与对应活动机制说明',
+    todo: '继续补充公告正文的完整机制拆解，并与 SS12 金钞传播链做映射',
     owner: '大飞哥'
   },
   {
