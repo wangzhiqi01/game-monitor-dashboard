@@ -640,6 +640,7 @@ function renderGameDetailPanel(game) {
                 </div>
                 <h4>${item.title}</h4>
                 <p class="muted">${item.summary}</p>
+                ${item.researchNote ? `<div class="research-note">${item.researchNote}</div>` : ''}
                 <div class="timeline-links">
                   ${item.sourceUrl ? `<a class="inline-link" href="${item.sourceUrl}" target="_blank" rel="noreferrer">查看原始来源</a>` : '<span class="muted">暂无来源链接</span>'}
                   <span class="muted">${item.sourcePlatform} · ${item.sourceType} · ${item.capturedAt}</span>

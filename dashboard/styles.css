@@ -315,6 +315,15 @@ body {
   margin: 10px 0 8px;
   font-size: 16px;
 }
+.research-note {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(56,189,248,.08);
+  border: 1px solid rgba(56,189,248,.18);
+  color: var(--text);
+  line-height: 1.8;
+}
 .timeline-top {
   display: flex;
   gap: 8px;

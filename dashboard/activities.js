@@ -80,16 +80,17 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Sandlord] Gold Rush Event Announcement',
     importance: 'high',
-    summary: '真实公告摘要：可通过签到与赛季活动获取多次 Pactspirit 抽取机会、Activation Medium，并可通过刷图参与抽取纪念金钞。',
+    summary: '真实公告摘要：可通过签到与赛季活动获取多次 Pactspirit 抽取机会、Activation Medium，并可通过刷图参与抽取纪念金钞。这类公告同时具备“福利驱动”和“赛季回流理由”两层价值。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=pidg8uIC7DE6',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '继续补充公告正文的完整机制拆解，并与 SS12 金钞传播链做映射',
+    todo: '已补第一轮研究结论；下一步继续拆正文中的奖励机制与传播话术映射',
     owner: '大飞哥',
     subType: 'Event Announcement',
-    researchTag: '活动向'
+    researchTag: '活动向',
+    researchNote: '研究启发：这类公告最适合承接“刷图就有反馈”“参与活动即有奖励机会”的传播表达，可直接映射到金钞项目的参与逻辑。'
   },
   {
     id: 'act-torchlight-real-20240419-01',
@@ -100,16 +101,17 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Whispering Mist] Event Announcement',
     importance: 'medium',
-    summary: '真实公告摘要：可通过签到获取 Legendary Drop Pactspirit 相关奖励与 Activation Medium，并围绕赛季活动继续参与刷图与奖励获取。',
+    summary: '真实公告摘要：可通过签到获取 Legendary Drop Pactspirit 相关奖励与 Activation Medium，并围绕赛季活动继续参与刷图与奖励获取。这种公告更偏“活动节奏 + 参与门槛较低”的拉新/回流表达。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=1ffdcuamXC0B',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '继续补该公告的完整正文拆解，并标注 Whispering Mist 赛季背景与活动机制',
+    todo: '已补第一轮研究结论；下一步继续补 Whispering Mist 赛季背景与活动设计细节',
     owner: '大飞哥',
     subType: 'Event Announcement',
-    researchTag: '活动向'
+    researchTag: '活动向',
+    researchNote: '研究启发：适合拆成“老玩家回流理由”“轻门槛参与奖励”“赛季活动节奏”三层传播口径。'
   },
   {
     id: 'act-torchlight-real-20240419-02',
@@ -120,16 +122,17 @@ window.GAME_MONITOR_ACTIVITIES = [
     category: '活动福利',
     title: '[Whispering Mist] Boon Announcement',
     importance: 'medium',
-    summary: '真实公告摘要：围绕 Legendary Drop Pactspirit、Activation Medium 与 Commemorative Gold Notes 等奖励机制展开，是典型的福利向公告样板。',
+    summary: '真实公告摘要：围绕 Legendary Drop Pactspirit、Activation Medium 与 Commemorative Gold Notes 等奖励机制展开，是典型的福利向公告样板。它更适合用来支撑“福利足、奖励直给、刺激参与”的表达。',
     sourcePlatform: '官网 / 新闻 JSON',
     sourceType: '真实公告样板',
     sourceUrl: 'https://torchlight.xd.com/en/news/single?id=b2u19uan4vtg',
     capturedAt: '2026-04-14 10:55',
     freshness: 'stale',
-    todo: '继续补福利条款细节，并与同赛季活动公告做配对展示',
+    todo: '已补第一轮研究结论；下一步继续整理福利条款细节，并与活动公告做配对展示',
     owner: '大飞哥',
     subType: 'Boon Announcement',
-    researchTag: '福利向'
+    researchTag: '福利向',
+    researchNote: '研究启发：这类公告更适合单独抽出来做福利钩子，和活动向公告形成“参与理由 + 奖励刺激”的配对结构。'
   },
   {
     id: 'act-poe2-20260413-01',
